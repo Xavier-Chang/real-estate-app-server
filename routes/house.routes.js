@@ -12,6 +12,9 @@ const upload = multer({ storage: multer.memoryStorage() });
 router.post("/houses", upload.single("housePicture"), async (req, res, next) => {
   try {
     const {
+      streetName,
+      houseNumber,
+      numberAddition,
       price,
       size,
       description,
@@ -26,7 +29,7 @@ router.post("/houses", upload.single("housePicture"), async (req, res, next) => 
     };
 
     const location = {
-      street: req.body['street'],
+      street: `${streetName} ${houseNumber}${numberAddition ? ' ' + numberAddition : ''}`,
       city: req.body['city'],
       zip: req.body['zip'],
     };
@@ -60,6 +63,67 @@ router.post("/houses", upload.single("housePicture"), async (req, res, next) => 
     console.error("Error in POST /api/houses:", err);
     res.status(500).json({ message: "Internal server error", error: err });
   }
+});
+
+//  PUT /api/houses/:houseId - Updates a specific house by id
+router.put("/houses/:houseId", upload.single("housePicture"), async (req, res, next) => {
+  const { houseId } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(houseId)) {
+    res.status(400).json({ message: "Specified id is not valid" });
+    return;
+  }
+
+  const {
+    streetName,
+    houseNumber,
+    numberAddition,
+    price,
+    size,
+    description,
+    constructionYear,
+    hasGarage,
+    madeByMe,
+  } = req.body;
+
+  const rooms = {
+    bedrooms: req.body['bedrooms'],
+    bathrooms: req.body['bathrooms'],
+  };
+
+  const location = {
+    street: `${streetName} ${houseNumber}${numberAddition ? ' ' + numberAddition : ''}`,
+    city: req.body['city'],
+    zip: req.body['zip'],
+  };
+
+  const updateData = {
+    price,
+    rooms,
+    size,
+    description,
+    location,
+    constructionYear,
+    hasGarage,
+    madeByMe,
+  };
+
+  // Check if the image file exists in the request
+  if (req.file) {
+    // Upload the image to Cloudinary
+    const result = await cloudinary.uploader.upload(
+      `data:${req.file.mimetype};base64,${req.file.buffer.toString("base64")}`, // Add the mimetype and prefix
+      { resource_type: "image" }
+    );
+
+    // Add the uploaded image URL to the update data
+    updateData.image = result.secure_url;
+  }
+
+  // Update the house with the new data
+  House.findByIdAndUpdate(houseId, updateData, { new: true })
+    .then((updatedHouse) => res.status(200).json(updatedHouse))
+    .catch((error) => res.json(error));
 });
 
 //  GET /api/houses -  Retrieves all of the houses
