@@ -21,14 +21,14 @@ router.post("/houses", upload.single("housePicture"), async (req, res, next) => 
     } = req.body;
 
     const rooms = {
-      bedrooms: parseInt(req.body['rooms.bedrooms'], 10),
-      bathrooms: parseInt(req.body['rooms.bathrooms'], 10),
+      bedrooms: req.body['bedrooms'],
+      bathrooms: req.body['bathrooms'],
     };
 
     const location = {
-      street: req.body['location.street'],
-      city: req.body['location.city'],
-      zip: req.body['location.zip'],
+      street: req.body['street'],
+      city: req.body['city'],
+      zip: req.body['zip'],
     };
 
     // Check if the image file exists in the request
