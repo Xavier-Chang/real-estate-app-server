@@ -19,8 +19,8 @@ module.exports = (app) => {
 
   app.use(
     cors({
-      // origin: ["http://localhost:8080",process.env.ORIGIN],
-      origin: "https://xavier-real-estate-app.netlify.app",
+      origin: ["http://localhost:8080", process.env.ORIGIN],
+      // origin: ["http://localhost:8080", "https://xavier-real-estate-app.netlify.app"],
       credentials: true
     })
   );
