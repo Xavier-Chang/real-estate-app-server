@@ -19,11 +19,11 @@ To run the backend server locally, follow these steps:
 
 4. Create a `.env` file in the project root folder with the following environment variables:
 
-CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
-CLOUDINARY_API_KEY=your_cloudinary_api_key
-CLOUDINARY_API_SECRET=your_cloudinary_api_secret
-MONGODB_URI=your_mongodb_connection_string
-JWT_SECRET=your_jwt_secret_key
+- CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
+- CLOUDINARY_API_KEY=your_cloudinary_api_key
+- CLOUDINARY_API_SECRET=your_cloudinary_api_secret
+- MONGODB_URI=your_mongodb_connection_string
+- JWT_SECRET=your_jwt_secret_key
 
 5. Start the development server:
 <br>npm run dev
