@@ -1,5 +1,7 @@
 # Real Estate App Backend
 
+Check out the deployed version: [Real Estate App](https://xavier-real-estate-app.netlify.app/)
+
 This is the backend server for the Real Estate App, which provides APIs for the frontend to interact with. It is built using Express.js and connects to a MongoDB database via Mongoose.
 
 Front-end repository: [Real Estate App Client](https://github.com/Xavier-Chang/real-estate-app-client)
