@@ -20,7 +20,7 @@ router.post("/houses", upload.single("housePicture"), async (req, res, next) => 
       description,
       constructionYear,
       hasGarage,
-      madeByMe,
+      madeBy,
     } = req.body;
 
     const rooms = {
@@ -55,7 +55,7 @@ router.post("/houses", upload.single("housePicture"), async (req, res, next) => 
       location,
       constructionYear,
       hasGarage,
-      madeByMe,
+      madeBy,
     });
 
     res.json(house);
@@ -83,7 +83,7 @@ router.put("/houses/:houseId", upload.single("housePicture"), async (req, res, n
     description,
     constructionYear,
     hasGarage,
-    madeByMe,
+    madeBy,
   } = req.body;
 
   const rooms = {
@@ -105,7 +105,7 @@ router.put("/houses/:houseId", upload.single("housePicture"), async (req, res, n
     location,
     constructionYear,
     hasGarage,
-    madeByMe,
+    madeBy,
   };
 
   // Check if the image file exists in the request

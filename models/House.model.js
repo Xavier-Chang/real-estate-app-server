@@ -18,7 +18,7 @@ const houseSchema = new mongoose.Schema({
   createdAt: Date,
   constructionYear: Number,
   hasGarage: Boolean,
-  madeByMe: Boolean
+  madeBy: String
 });
 
 module.exports = model("House", houseSchema);
